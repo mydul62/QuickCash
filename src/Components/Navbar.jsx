@@ -1,16 +1,24 @@
 import React from 'react';
 import { FaBars } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
 
-const Navbar = ({handleDashboard}) => {
+const Navbar = ({handleDashboard,dashboard}) => {
+const user = JSON.parse(localStorage.getItem('user'));
+console.log(user);
   return (
     <nav className="relative bg-white shadow dark:bg-gray-800">
       <div className="px-6 py-4 mx-auto">
         <div className="flex items-center justify-between">
           <div className="flex gap-2 items-center justify-between">
-          <div className=' flex md:hidden items-center justify-center'><FaBars onClick={()=>handleDashboard()} size={20} />
+          <div className=' flex md:hidden items-center justify-center'>
+          {
+          dashboard? <FaBars onClick={()=>handleDashboard()} size={20} />:<RxCross2 onClick={()=>handleDashboard()} size={20} />
+          }
+         
+          
           </div>
             <div>
-            <h2 className=' text-[#8b1f75] text-2xl font-bold'>QuickCash</h2>
+            <h2 className=' text-green-500 text-2xl font-bold'>QuickCash</h2>
             </div>
           </div>
 
@@ -24,7 +32,7 @@ const Navbar = ({handleDashboard}) => {
               </button>
 
               <button type="button" className="flex items-center focus:outline-none" aria-label="toggle profile dropdown">
-                <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                <div title={`${user?.email}`} className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
                   <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" className="object-cover w-full h-full" alt="avatar" />
                 </div>
               </button>
